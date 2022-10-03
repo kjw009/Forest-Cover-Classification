@@ -1,5 +1,6 @@
 # Forest-Cover-Classification
 Building a neural network using TensorFlow to identify different forest cover types. Practice tuning hyper-parameters. 
+
 ![forest covers photo](https://github.com/jaimeggb/Forest-Cover-Classification/blob/main/other_resources/forest%20cover.png)
 
 ## Description: 
