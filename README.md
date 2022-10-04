@@ -24,3 +24,6 @@ Project Objectives:
 - Use knowledge of hyperparameter tuning to improve the performance of my model as well as keras tuner to give suggestions for params
 - Test and analyze performance of the model
 - Create clean and modular code
+
+## How to obtain cover_data.csv
+The dataset can be downloaded from UCL machine learning Repository: https://archive.ics.uci.edu/ml/datasets/covertype.
