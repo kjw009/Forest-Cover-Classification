@@ -1,0 +1,34 @@
+nice little project! part 1:
+
+Peer review was completed by salt rock lamp from the python discord.
+
+
+* good job describing each variable in your data set, including units
+
+* use pandas Categorical dtype for things like class labels: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html. internally it stores the data as int, and you can easily access the int values for putting them into a machine learning model.
+
+* use pandas boolean dtype for yes/no binary values (soil types)
+
+* normally i would say that pie charts are bad, but this "proportion of classes in dataset" chart is an okay use of it
+
+* it would have been good if you also displayed this "distribution of 7 forest types" the other way around in addition to what you created: one "pie" for each wilderness area, with 7 "slices" for each forest type. consider also a "small multiples" 2x2 grid of bar charts as an alternative that has more fidelity at smaller sizes: https://www.displayr.com/what-are-small-multiples/
+
+* excellent use of violin plots!
+
+* i would strongly question the interpretation of the extremes of the elevation distribution as outliers. this is just a distribution with a long tail. consider that elevation is bounded at the bottom. by comparison, if you found one or two isolated aspen stands at sea level, that would be an outlier. i see that you actually dropped these outliers from the data in your pre-processing, which i think is a big mistake, and reflects that you are over-relying on mechanical procedures. domain knowledge always supersedes textbook recipes.
+
+* # We subract 1 from every class value to include 0 as a label for the softmax you forgot to actually subtract 1. that said, you could use pandas Categorical here and not worry about it.
+
+* it might be interesting to see how well it compares to xgboost, as well as to a smaller neural network with fewer layers/parameters, and even linear regression. it's important to establish baselines!
+
+* good job with the heatmap of the confusion matrix.
+
+* did you validate these results manually? i'm surprised to see better accuracy in the test set than in the training set.
+
+* i don't know if there is currently any research into this kind of thing with neural networks, but in traditional statistics i would be strongly tempted to add some kind of "spatial autocorrelation" into this model: the tree cover type in any cell is almost certainly correlated with the tree cover type in surrounding cells, and the rate of change in tree cover type between cells is probably correlated with the rate of change of other features (elevation, etc). however if the accuracy really is > 90%, then perhaps the gains to adding this to your model would be marginal and only useful if you needed to improve it further (e.g. i see that there is a lot of "confusion" in your model between spruce/fir and lodgepole pine). this will depend a lot on your real-world application. perhaps this could be encoded as a CNN over several "layers" of features (equivalent to RGB in image models, called "channels"), but i'd have to do some research to see what's the established best practice here.
+
+* consider also that the rate of change of elevation (hillside/mountainside vs flat) might itself be a useful feature.
+
+* it might also be interesting to look into bayesian machine learning to obtain a probability distribution over tree cover types.
+
+https://arxiv.org/abs/1906.04928 some relevant stuff in here
